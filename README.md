@@ -1,2 +1,6 @@
 # Java-2048
-Game of 2048 in Java
+
+Text based game of 2048 in Java
+
+3/23/2020
+
