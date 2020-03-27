@@ -54,13 +54,23 @@ public class Text2048 {
 		
 		for (int row = 0; row < 4; row++) {
 			for (int column = 0; column < 4; column++) {
-				if (column == 0) {
-					System.out.print("| " + board[row][column] + " ");
-				} else if (column == 3) {
-					System.out.print(" " + board[row][column] + " |");
+				if (board[row][column] != 0) {
+					if (column == 0) {
+						System.out.print("| " + board[row][column] + " ");
+					} else if (column == 3) {
+						System.out.print(" " + board[row][column] + " |");
+					} else {
+						System.out.print(" " + board[row][column] + " ");
+					}	
 				} else {
-					System.out.print(" " + board[row][column] + " ");
-				}				
+					if (column == 0) {
+						System.out.print("| " + " " + " ");
+					} else if (column == 3) {
+						System.out.print(" " + " " + " |");
+					} else {
+						System.out.print(" " + " " + " ");
+					}
+				}
 			}
 			System.out.println("");
 		}
@@ -73,10 +83,7 @@ public class Text2048 {
 	}
 	
 	public static int[][] playRandomMove(int[][] board, int turn) {
-		int spawnCount = 1;
-		if (turn == 1) {
-			spawnCount = 2;
-		}
+		int spawnCount = 2;
 		
 		for (int i = 0; i < spawnCount; i++) {
 			while (true) {
@@ -111,6 +118,11 @@ public class Text2048 {
 			}
 		}
 		return emptyCells;
+	}
+	
+	public static int[][] getTakenSpots(int[][] board) {
+		int[][] takenSpots = new int[16 - getRemainingSpots(board)][];
+		return board;
 	}
 	
 	public static int[][] moveUp(int[][] board) {
