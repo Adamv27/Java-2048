@@ -86,24 +86,18 @@ public class Text2048 {
 		int spawnCount = 2;
 		
 		for (int i = 0; i < spawnCount; i++) {
-			while (true) {
-				int randX = (int) Math.floor(Math.random() * 4);
-				int randY = (int) Math.floor(Math.random() * 4);
-				int randMove = (int) Math.floor((Math.random() * 10));
+			int[][] availableSpots = getAvailableSpots(board);	
+			int randCords = (int) Math.floor((Math.random() * availableSpots.length));		
+			int randMove = (int) Math.floor((Math.random() * 10));
 				
-				// In 2048 there is a 10% chance to randomly spawn a 4 instead of 2
-				if (randMove == 0) {
-					randMove = 4;
-				} else {
-					randMove = 2;
-				}
-				
-				// A random move can only go in an empty cell (0)
-				if (board[randY][randX] == 0) {
-					board[randY][randX] = randMove;
-					break;
-				}
+			// In 2048 there is a 10% chance to randomly spawn a 4 instead of 2
+			if (randMove == 0) {
+				randMove = 4;
+			} else {
+				randMove = 2;
 			}
+			
+			board[availableSpots[randCords][0]][availableSpots[randCords][0]] = randMove;
 		}
 		return board;
 	}
@@ -120,9 +114,19 @@ public class Text2048 {
 		return emptyCells;
 	}
 	
-	public static int[][] getTakenSpots(int[][] board) {
-		int[][] takenSpots = new int[16 - getRemainingSpots(board)][];
-		return board;
+	public static int[][] getAvailableSpots(int[][] board) {
+		int[][] takenSpots = new int[getRemainingSpots(board)][2];
+		int count = 0;
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++) {
+				if (board[i][j] == 0) {
+					takenSpots[count][0] = i;
+					takenSpots[count][1] = j;
+					count++;
+				}
+			}
+		}
+		return takenSpots;
 	}
 	
 	public static int[][] moveUp(int[][] board) {
