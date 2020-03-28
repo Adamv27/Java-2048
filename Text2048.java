@@ -22,14 +22,19 @@ public class Text2048 {
 				move = input.nextLine();
 			} while (!(move.equals("w") || move.equals("a") || move.equals("s") || move.equals("d")));
 			
-			if (move.equals("w")) {
-				moveUp(board);
-			} else if (move.equals("s")) {
-				moveDown(board);
-			} else if (move.equals("d")) {
-				moveLeft(board);
-			} else if (move.equals("a")) {
-				moveRight(board);
+			switch (move) {
+				case "w":
+					moveUp(board);
+					break;
+				case "a":
+					moveLeft(board);
+					break;
+				case "s":
+					moveDown(board);
+					break;
+				case "d":
+					moveRight(board);
+					break;
 			}
 			
 			if (getRemainingSpots(board) > 0) {
